@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -18,8 +19,8 @@ class Kot(models.Model):
     kot_address = models.CharField(max_length=256)
     price_month = models.DecimalField(max_digits=7, decimal_places=2)
     area_size = models.IntegerField()
-    location_start_date = models.DateField()
-    location_end_date = models.DateField()
+    location_start_date = models.DateField(null=True)
+    location_end_date = models.DateField(null=True)
     kot_owner = models.ForeignKey(KotOwner, on_delete=models.CASCADE)
 
 

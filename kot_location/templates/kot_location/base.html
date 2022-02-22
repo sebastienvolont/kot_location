@@ -7,8 +7,22 @@
     <link rel="stylesheet" href="{% static 'kot_location/styles.css' %}">
 </head>
 <body>
-    {% block content %}
+<header>
+    <nav>
+        <ul>
+            <li><a href="/home_page">Page d'accueil</a></li>
+            <li><a href="/kot_list">Kots disponibles</a></li>
+            {% if request.user.is_authenticated %}
+            <li id="deconnexion"><a href="/logout"> Se déconnecter </a></li> <br>
+            {% else %}
+            <li id="connexion"><a href="/login"> Se connecter </a></li> <br>
+            {% endif %}
+        </ul>
+    </nav>
 
-    {% endblock %}
+</header>
+{% block content %}
+
+{% endblock %}
 </body>
 </html>

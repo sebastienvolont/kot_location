@@ -1,0 +1,13 @@
+{% extends 'kot_location/base.html' %}
+
+    {% block content %}
+        <button><a href="/kot/add">Ajouter une offre de location</a></button> <br>
+        {% for kot in kots %}
+        <a href="{% url 'kot-details' kot.id %}">
+        <div id="kot-container">
+            {{kot.kot_address}}, {{kot.price_month}}, {{kot.id}}
+
+        </div>
+        </a>
+        {% endfor %}
+    {% endblock %}

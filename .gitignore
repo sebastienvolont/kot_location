@@ -1,4 +1,3 @@
 db.sqlite3
 kot_agency/.env
-kot_agency/.pg_pass
-kot_agency/.pg_service.conf
+__pycache__/

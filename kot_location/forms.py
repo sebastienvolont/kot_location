@@ -1,7 +1,8 @@
 from django import forms
 
-from django.contrib.auth.models import User
-from .models import KotOwner, Kot
+# from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .models import KotOwner, Kot, User
 
 
 class KotOwnerForm(forms.ModelForm):
@@ -16,7 +17,7 @@ class KotForm(forms.ModelForm):
         fields = '__all__'
 
 
-class RegisterForm(forms.ModelForm):
+class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'password', 'user_type']

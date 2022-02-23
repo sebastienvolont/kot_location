@@ -22,7 +22,11 @@ def kot_add(request):
     if request.method == 'POST':
         form = KotForm(request.POST)
         if form.is_valid():
-            kot = form.save()
+            start_date = form.cleaned_data.get("location_start_date")
+            end_date = form.cleaned_data.get("location_end_date")
+            days_number = end_date - start_date
+            if end_date > start_date:
+                kot = form.save()
     else:
         form = KotForm()
     return render(request, 'kot_location/kot_add.html', {'form': form})
@@ -30,8 +34,7 @@ def kot_add(request):
 
 def login_user(request):
     if request.user.is_authenticated:
-        is_connected = request.user.is_authenticated
-        return render(request, 'kot_location/base.html', {'is_connected': is_connected})
+        return redirect('/')
     else:
         if request.method == "POST":
             form = AuthenticationForm(request, data=request.POST)
@@ -72,3 +75,12 @@ def is_active(request):
 def kot_details(request, id):
     kot = Kot.objects.get(id=id)
     return render(request, 'kot_location/kot_details.html', {'kot': kot})
+
+
+def kot_delete(request, id):
+    kot_to_delete = Kot.objects.get(id=id)
+    if request.method == 'POST':
+        kot_to_delete.delete()
+        return redirect('/kot_list')
+
+    return render(request, 'kot_location/kot_delete.html', {'kot_to_delete': kot_to_delete})

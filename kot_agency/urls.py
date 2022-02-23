@@ -19,8 +19,9 @@ from kot_location import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home_page/', views.home_page),
+    path('', views.home_page),
     path('kot/add', views.kot_add),
+    path('kot/delete/<int:id>', views.kot_delete),
     path('kot/<int:id>', views.kot_details, name="kot-details"),
     path('kot_list/', views.kot_list),
     path('login/', views.login_user),

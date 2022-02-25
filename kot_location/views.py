@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.models import Permission
 from django.contrib import messages
 from django.contrib.messages import get_messages
 
@@ -14,12 +15,13 @@ def home_page(request):
     return render(request, 'kot_location/home_page.html')
 
 
-@login_required(login_url='/login')
 def kot_list(request):
     all_kot = Kot.objects.all()
     return render(request, 'kot_location/kot_list.html', {'kots': all_kot})
 
 
+@login_required(login_url='/login')
+@permission_required('kot_location.add_kot', raise_exception=True)
 def kot_add(request):
     if request.method == 'POST':
         form = KotForm(request.POST)
@@ -60,16 +62,23 @@ def logout_user(request):
 
 
 def register_user(request):
-    form = RegisterForm()
-    if request.method == "POST":
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('/kot_list')
+    if request.user.is_authenticated:
+        return redirect('/')
     else:
         form = RegisterForm()
-    return render(request, 'kot_location/register.html', {'form': form})
+        if request.method == "POST":
+            print("test")
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                if request.user.user_type == 'OWNER':
+                    permission_owner = Permission.objects.get(codename='add_kot')
+                    user.user_permissions.add(permission_owner)
+                return redirect('/kot_list')
+        else:
+            form = RegisterForm()
+        return render(request, 'kot_location/register.html', {'form': form})
 
 
 def kot_details(request, id):
@@ -84,3 +93,7 @@ def kot_delete(request, id):
         return redirect('/kot_list')
 
     return render(request, 'kot_location/kot_delete.html', {'kot_to_delete': kot_to_delete})
+
+
+def kot_update(request, id):
+    return HttpResponse('Page de modification')

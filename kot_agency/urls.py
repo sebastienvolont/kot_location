@@ -23,6 +23,7 @@ urlpatterns = [
     path('kot/add', views.kot_add),
     path('kot/delete/<int:id>', views.kot_delete),
     path('kot/<int:id>', views.kot_details, name="kot-details"),
+    path('kot/update', views.kot_update),
     path('kot_list/', views.kot_list),
     path('login/', views.login_user),
     path('register/', views.register_user),

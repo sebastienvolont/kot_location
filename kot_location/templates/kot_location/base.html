@@ -13,7 +13,13 @@
             <li><a href="/">Page d'accueil</a></li>
             <li><a href="/kot_list">Kots disponibles</a></li>
             {% if request.user.is_authenticated %}
-            <li id="deconnexion"><a href="/logout"> Se déconnecter </a></li> <br>
+
+            <li id="deconnexion"><a href="/logout"> {{request.user.username}} <br> Se déconnecter </a></li>
+                {% if request.user.user_type == 'OWNER' %}
+                <li> Propriétaire </li>
+                {% else %}
+                <li> Locataire </li>
+                {% endif %}
             {% else %}
             <li id="connexion"><a href="/login"> Se connecter </a></li> <br>
             {% endif %}

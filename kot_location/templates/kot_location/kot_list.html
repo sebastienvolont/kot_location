@@ -1,12 +1,13 @@
 {% extends 'kot_location/base.html' %}
 
     {% block content %}
-        <button><a href="/kot/add">Ajouter une offre de location</a></button> <br>
+        {% if request.user.is_authenticated and perms.kot_location.add_kot %}
+            <button><a href="/kot/add">Ajouter une offre de location</a></button> <br>
+        {% endif %}
         {% for kot in kots %}
         <a href="{% url 'kot-details' kot.id %}">
         <div id="kot-container">
             {{kot.kot_address}}, {{kot.price_month}}, {{kot.id}}
-
         </div>
         </a>
         {% endfor %}

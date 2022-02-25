@@ -3,6 +3,8 @@
     {% block content %}
     <h1 id="homepage-title"> Home page </h1>
     <div id="homepage-text">
-
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
     </div>
     {% endblock %}

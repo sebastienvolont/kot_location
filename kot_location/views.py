@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.messages import get_messages
 
 from .models import Kot, KotOwner
 from .forms import KotOwnerForm, KotForm, RegisterForm
@@ -27,6 +29,7 @@ def kot_add(request):
             days_number = end_date - start_date
             if end_date > start_date:
                 kot = form.save()
+                messages.add_message(request, messages.SUCCESS, 'Annonce ajoutée !')
     else:
         form = KotForm()
     return render(request, 'kot_location/kot_add.html', {'form': form})
@@ -57,19 +60,16 @@ def logout_user(request):
 
 
 def register_user(request):
+    form = RegisterForm()
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            login(request, user)
+            return redirect('/kot_list')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'kot_location/register.html', {'form': form})
-
-
-def is_active(request):
-    if request.user.is_authenticated:
-        is_connected = request.user.is_authenticated
-        return HttpResponse('<h1> Authentifié </h1>')
 
 
 def kot_details(request, id):

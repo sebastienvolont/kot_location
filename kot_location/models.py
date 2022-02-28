@@ -5,6 +5,7 @@ from django.db import models
 class User(AbstractUser):
     OWNER = 'OWNER'
     RENTER = 'RENTER'
+    ADMINISTRATOR = 'ADMIN'
 
     type_choice = {
         (OWNER, 'Propriétaire'),
@@ -15,7 +16,21 @@ class User(AbstractUser):
 
 
 class Kot(models.Model):
+
+    Brussels = 'Bruxelles'
+    Louvain_La_Neuve = 'Louvain-la-Neuve'
+    Liege = 'Liège'
+    Namur = 'Namur'
+
+    city_choice = {
+        (Brussels, 'Bruxelles'),
+        (Louvain_La_Neuve, 'Louvain-la-Neuve'),
+        (Liege, 'Liège'),
+        (Namur, 'Namur')
+    }
+
     kot_address = models.CharField(max_length=256)
+    kot_city = models.CharField(max_length=30, choices=city_choice)
     price_month = models.DecimalField(max_digits=7, decimal_places=2)
     area_size = models.IntegerField()
     location_start_date = models.DateField(null=True)

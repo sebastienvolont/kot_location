@@ -4,18 +4,38 @@
     {% if request.user.is_authenticated and perms.kot_location.add_kot %}
         <button><a href="/kot/add">Ajouter une offre de location</a></button> <br>
     {% endif %}
-    {% for kot in kots %}
-        <a href="{% url 'kot-details' kot.id %}">
-            <div id="kot-container">
-                {{ kot.kot_address }}, {{ kot.price_month }}, {{ kot.id }}
-                {% if kot.kot_owner_id  == request.user.id %}
-                    <button> Supprimer l'offre</button>
-                {% endif %}
-                {% if request.user.user_type == 'RENTER' %}
-                    <button> Suivre cette offre</button>
-                {% endif %}
-            </div>
+    <label for="kot-city"> Filtrer par ville </label>
+    <form method="POST">
+        {% csrf_token %}
+        <select name="city" id="kot-city">
+            {% for kot in kots %}
+                <option value="{{ kot.kot_city }}">{{ kot.kot_city }}</option>
+            {% endfor %}
+        </select> <br> <br>
+        <label for="kot-price"> Filtrer par prix </label>
+        <select name="price" id="kot-price">
+            <option value=299> Moins de 300 euros</option>
+            <option value=300> Plus de 300 euros</option>
+        </select>
+        <input type="submit" value="Filtrer">
+    </form> <br><br>
 
-        </a>
+    {% for kot in kots %}
+        {% for kotad in kots_ads %}
+            {% if kot.id == kotad.kot_id %}
+                <a href="{% url 'kot-details' kot.id %}">
+                    <div id="kot-container">
+                        {{ kot.kot_address }}, {{ kot.price_month }}, {{ kot.id }}
+                        {% if kot.kot_owner_id  == request.user.id %}
+                            <button> Supprimer l'offre</button>
+                            <button><a href="/kot/{{ kot.id }}/update"> Mettre à jour </a></button>
+                        {% endif %}
+                        {% if request.user.user_type == 'RENTER' %}
+                            <button> Suivre cette offre</button>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
 {% endblock %}

@@ -26,6 +26,8 @@ urlpatterns = [
     path('kot/<int:id>/update', views.kot_update),
     path('kot_list/', views.kot_list),
     path('owner/<int:id>/offers', views.kot_offers),
+    path('kot/validation_list/', views.kot_validation_list),
+    path('kot/<int:id>/check/', views.kot_check),
     path('login/', views.login_user),
     path('register/', views.register_user),
     path('logout/', views.logout_user)

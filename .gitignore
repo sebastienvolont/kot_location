@@ -1,5 +1,7 @@
+__pycache__/
+.idea/
+
 db.sqlite3
 kot_agency/.env
-__pycache__/
 .coverage
 kot_location.png

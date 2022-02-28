@@ -13,13 +13,15 @@
             <li><a href="/">Page d'accueil</a></li>
             <li><a href="/kot_list">Kots disponibles</a></li>
             {% if request.user.is_authenticated %}
-
                 <li id="deconnexion"><a href="/logout"> {{ request.user.username }} <br> Se déconnecter </a></li>
                 {% if request.user.user_type == 'OWNER' %}
                     <li><a href="/owner/{{ request.user.id }}/offers"> Mes offres de locations </a></li>
                     <li> Propriétaire</li>
-                {% else %}
+                {% elif request.user.user_type == 'RENTER' %}
                     <li> Locataire</li>
+                {% elif request.user.is_superuser %}
+                    <li><a href="/kot/validation_list/"> Demande de publication d'annonce </a></li>
+                    <li> Administrateur </li>
                 {% endif %}
             {% else %}
                 <li id="connexion"><a href="/login"> Se connecter </a></li> <br>

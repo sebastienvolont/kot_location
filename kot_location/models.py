@@ -16,7 +16,6 @@ class User(AbstractUser):
 
 
 class Kot(models.Model):
-
     Brussels = 'Bruxelles'
     Louvain_La_Neuve = 'Louvain-la-Neuve'
     Liege = 'Liège'
@@ -31,6 +30,7 @@ class Kot(models.Model):
 
     kot_address = models.CharField(max_length=256)
     kot_city = models.CharField(max_length=30, choices=city_choice)
+    kot_image = models.ImageField(upload_to='kot_location/')
     price_month = models.DecimalField(max_digits=7, decimal_places=2)
     area_size = models.IntegerField()
     location_start_date = models.DateField(null=True)
@@ -45,3 +45,8 @@ class KotAd(models.Model):
     publication_date = models.DateField()
     is_active = models.BooleanField(default=False)
     kot = models.ForeignKey(Kot, on_delete=models.CASCADE)
+
+
+class RenterFavoriteAd(models.Model):
+    renter_user = models.ForeignKey(Kot, on_delete=models.CASCADE)
+    followed_ad = models.ForeignKey(KotAd, on_delete=models.CASCADE)

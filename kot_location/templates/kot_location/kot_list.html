@@ -26,6 +26,7 @@
                 <a href="{% url 'kot-details' kot.id %}">
                     <div id="kot-container">
                         {{ kot.kot_address }}, {{ kot.price_month }}, {{ kot.id }}
+
                         {% if kot.kot_owner_id  == request.user.id %}
                             <button> Supprimer l'offre</button>
                             <button><a href="/kot/{{ kot.id }}/update"> Mettre à jour </a></button>
@@ -33,6 +34,7 @@
                         {% if request.user.user_type == 'RENTER' %}
                             <button> Suivre cette offre</button>
                         {% endif %}
+{#                    <img src="/media/{{ kot.kot_image }}" alt="photo kot">#}
                     </div>
                 </a>
             {% endif %}

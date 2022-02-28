@@ -3,7 +3,9 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Kot location app</title>
+    <title>KotLocation </title>
+    <link rel="icon"
+          href="https://cdn-icons.flaticon.com/png/512/5502/premium/5502904.png?token=exp=1646062429~hmac=05c96139b5a6dd10468189f7156e1354">
     <link rel="stylesheet" href="{% static 'kot_location/styles.css' %}">
 </head>
 <body>
@@ -18,10 +20,11 @@
                     <li><a href="/owner/{{ request.user.id }}/offers"> Mes offres de locations </a></li>
                     <li> Propriétaire</li>
                 {% elif request.user.user_type == 'RENTER' %}
+                    <li><a href="/renter/offers"> Offres suivies </a></li>
                     <li> Locataire</li>
                 {% elif request.user.is_superuser %}
                     <li><a href="/kot/validation_list/"> Demande de publication d'annonce </a></li>
-                    <li> Administrateur </li>
+                    <li> Administrateur</li>
                 {% endif %}
             {% else %}
                 <li id="connexion"><a href="/login"> Se connecter </a></li> <br>

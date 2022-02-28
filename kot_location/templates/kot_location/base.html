@@ -14,14 +14,15 @@
             <li><a href="/kot_list">Kots disponibles</a></li>
             {% if request.user.is_authenticated %}
 
-            <li id="deconnexion"><a href="/logout"> {{request.user.username}} <br> Se déconnecter </a></li>
+                <li id="deconnexion"><a href="/logout"> {{ request.user.username }} <br> Se déconnecter </a></li>
                 {% if request.user.user_type == 'OWNER' %}
-                <li> Propriétaire </li>
+                    <li><a href="/owner/{{ request.user.id }}/offers"> Mes offres de locations </a></li>
+                    <li> Propriétaire</li>
                 {% else %}
-                <li> Locataire </li>
+                    <li> Locataire</li>
                 {% endif %}
             {% else %}
-            <li id="connexion"><a href="/login"> Se connecter </a></li> <br>
+                <li id="connexion"><a href="/login"> Se connecter </a></li> <br>
             {% endif %}
         </ul>
     </nav>

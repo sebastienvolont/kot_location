@@ -1,0 +1,8 @@
+{% extends 'kot_location/base.html' %}
+
+{% block content %}
+    {% for kot in kots %}
+        <h1>{{ kot.kot_address }}</h1>
+        <button> Supprimer l'offre</button>
+    {% endfor %}
+{% endblock %}

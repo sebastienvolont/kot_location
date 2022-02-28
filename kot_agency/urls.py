@@ -21,10 +21,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_page),
     path('kot/add', views.kot_add),
-    path('kot/delete/<int:id>', views.kot_delete),
+    path('kot/<int:id>/delete/', views.kot_delete),
     path('kot/<int:id>', views.kot_details, name="kot-details"),
-    path('kot/update', views.kot_update),
+    path('kot/<int:id>/update', views.kot_update),
     path('kot_list/', views.kot_list),
+    path('owner/<int:id>/offers', views.kot_offers),
     path('login/', views.login_user),
     path('register/', views.register_user),
     path('logout/', views.logout_user)

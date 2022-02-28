@@ -1,5 +1,6 @@
-body {
-    margin: auto;
+html, body, ul{
+    margin: 0;
+    padding: 0;
 }
 
 header {
@@ -28,7 +29,6 @@ nav li {
 }
 
 #login-menu {
-    padding: 1em;
     background-color : grey;
     width : 30%;
     display: block;
@@ -36,6 +36,7 @@ nav li {
     margin-left: auto;
     margin-right: auto;
     margin-top : 1em;
+    padding: 1em;
 }
 
 #homepage-title {
@@ -57,4 +58,15 @@ a {
 
 #deconnexion, #connexion {
     float: right;
+    border: 1px solid black;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+
+/*#deconnexion {*/
+/*    background-color : red;*/
+/*}*/
+
+#connexion {
+    background-color: limegreen;
 }

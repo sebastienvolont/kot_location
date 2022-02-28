@@ -1,5 +1,8 @@
 {% extends 'kot_location/base.html' %}
 
-  {% block content %}
-    {{ kot.id }} {{ kot.kot_address}}
-  {% endblock %}
+{% block content %}
+    {{ kot.id }} {{ kot.kot_address }}
+    {% if request.user.user_type == 'RENTER' %}
+        <button> Suivre cette offre</button>
+    {% endif %}
+{% endblock %}

@@ -1,14 +1,14 @@
 {% extends 'kot_location/base.html' %}
 
-    {% block content %}
+{% block content %}
     <form action="" method="post" novalidate>
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Envoyer"> <br>
         {% if messages %}
             {% for message in messages %}
-                {{message}}
+                {{ message }}
             {% endfor %}
         {% endif %}
     </form>
-    {% endblock %}
+{% endblock %}

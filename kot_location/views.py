@@ -7,8 +7,8 @@ from django.contrib.auth.models import Permission
 from django.contrib import messages
 from django.contrib.messages import get_messages
 
-from .models import Kot, KotOwner
-from .forms import KotOwnerForm, KotForm, RegisterForm
+from .models import Kot
+from .forms import KotForm, RegisterForm
 
 
 def home_page(request):
@@ -29,8 +29,11 @@ def kot_add(request):
             start_date = form.cleaned_data.get("location_start_date")
             end_date = form.cleaned_data.get("location_end_date")
             days_number = end_date - start_date
+            print(request.POST)
             if end_date > start_date:
-                kot = form.save()
+                kot = form.save(commit=False)
+                kot.kot_owner_id = request.user.id
+                kot.save()
                 messages.add_message(request, messages.SUCCESS, 'Annonce ajoutée !')
     else:
         form = KotForm()
@@ -67,7 +70,6 @@ def register_user(request):
     else:
         form = RegisterForm()
         if request.method == "POST":
-            print("test")
             form = RegisterForm(request.POST)
             if form.is_valid():
                 user = form.save()
@@ -96,4 +98,18 @@ def kot_delete(request, id):
 
 
 def kot_update(request, id):
-    return HttpResponse('Page de modification')
+    kot_to_update = Kot.objects.get(id=id)
+    if request.method == 'POST':
+        form = KotForm(request.POST, instance=kot_to_update)
+        if form.is_valid():
+            form.save()
+            return redirect('kot-details', kot_to_update.id)
+    else:
+        form = KotForm(instance=kot_to_update)
+
+    return render(request, 'kot_location/kot_update.html', {'form': form})
+
+
+def kot_offers(request, id):
+    kots_from_owner = Kot.objects.filter(kot_owner_id=id)
+    return render(request, 'kot_location/kot_owner_ads.html', {'kots': kots_from_owner})

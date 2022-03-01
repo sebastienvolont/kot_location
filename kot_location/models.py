@@ -31,7 +31,7 @@ class Kot(models.Model):
     kot_address = models.CharField(max_length=256)
     kot_city = models.CharField(max_length=30, choices=city_choice)
     kot_image = models.ImageField(upload_to='kot_location/',
-                                  default="https://d34ip4tojxno3w.cloudfront.net/app/uploads/placeholder.jpg")
+                                  default='kot_location/img-placeholder.jpg')
     price_month = models.DecimalField(max_digits=7, decimal_places=2)
     area_size = models.IntegerField()
     location_start_date = models.DateField(null=True)
@@ -45,7 +45,7 @@ class Kot(models.Model):
 class KotAd(models.Model):
     publication_date = models.DateField()
     is_active = models.BooleanField(default=False)
-    kot = models.ForeignKey(Kot, on_delete=models.CASCADE)
+    kot = models.ForeignKey(Kot, on_delete=models.CASCADE, unique=True)
 
 
 class RenterFavoriteAd(models.Model):

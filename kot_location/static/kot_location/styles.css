@@ -13,6 +13,7 @@ header {
     border-radius: 1em;
     margin: 1em 1em 1em 1em;
 }
+
 header img {
     margin: 1em;
 }
@@ -42,6 +43,7 @@ header img {
     color: black;
     margin: 0 0 0 1em;
     float: left;
+    text-align: left;
 }
 
 #kot-box button {
@@ -176,6 +178,7 @@ nav li {
     padding: 1em;
     border-radius: 1em;
 }
+
 #homepage-title {
     text-align: center;
 }
@@ -239,11 +242,20 @@ a {
     width: 40%
 }
 
-#img-update-page{
+#img-update-page {
     float: left;
     margin: 1em;
 }
 
-#form-update {
-    float: right;
+
+@media screen and (max-width: 800px) {
+    /*nav ul {*/
+    /*    font-size: 2em;*/
+    /*}*/
+    /*#kots-container {*/
+    /*    display: flex;*/
+    /*    flex-direction: row;*/
+    /*    flex-wrap: wrap;*/
+    /*}*/
+
 }

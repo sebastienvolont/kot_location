@@ -28,15 +28,16 @@ def kot_list(request):
     @return:
     """
     all_kot_ad = KotAd.objects.all()
-    print(request.POST)
+    choice_fields = Kot._meta.get_field('kot_city').choices
 
-    if request.POST:
+    if request.POST and request.POST['price'] != '' and request.POST['city'] != '':
         return render(request, 'kot_location/kot_list.html',
-                      {'kots': filter_kots(request, price_month__lte=request.POST['price'],
-                                           kot_city=request.POST['city']), 'kots_ads': all_kot_ad})
+                      {'kots': filter_kots(request, price_month__gte=request.POST['price'],
+                                           kot_city=request.POST['city']), 'kots_ads': all_kot_ad,
+                       'choice_fields': choice_fields})
     else:
         return render(request, 'kot_location/kot_list.html',
-                      {'kots': filter_kots(request), 'kots_ads': all_kot_ad})
+                      {'kots': filter_kots(request), 'kots_ads': all_kot_ad, 'choice_fields': choice_fields})
 
 
 def filter_kots(request, **kwargs):
@@ -142,12 +143,11 @@ def kot_add(request):
             start_date = form.cleaned_data.get("location_start_date")
             end_date = form.cleaned_data.get("location_end_date")
             days_number = end_date - start_date
-            print(request.POST)
             if end_date > start_date:
                 kot = form.save(commit=False)
                 kot.kot_owner_id = request.user.id
                 kot.save()
-                messages.add_message(request, messages.SUCCESS, 'Annonce ajoutée !')
+                messages.add_message(request, messages.SUCCESS, 'Annonce en cours de validation.')
     else:
         form = KotForm()
     return render(request, 'kot_location/kot_add.html', {'form': form})
@@ -163,11 +163,8 @@ def kot_delete(request, id: int):
     """
     kot_to_delete = Kot.objects.get(id=id)
     if request.user.id == kot_to_delete.kot_owner_id:
-        if request.method == 'POST':
-            kot_to_delete.delete()
-            return redirect('/kot_list')
-
-        return render(request, 'kot_location/kot_delete.html', {'kot_to_delete': kot_to_delete})
+        kot_to_delete.delete()
+        return redirect(f'/owner/{request.user.id}/offers')
     else:
         raise PermissionDenied
 

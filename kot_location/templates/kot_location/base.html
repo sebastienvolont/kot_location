@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <title>KotLocation </title>
     <link rel="icon"
-          href="https://cdn-icons.flaticon.com/png/512/5502/premium/5502904.png?token=exp=1646062429~hmac=05c96139b5a6dd10468189f7156e1354">
+          href="/media/kot_location/website-icon.jpg">
     <link rel="stylesheet" href="{% static 'kot_location/styles.css' %}">
+     <meta name="viewport" content="width=device-width">
     <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 </head>
 <body>
@@ -23,7 +24,7 @@
                     <li><a href="/renter/offers"> Offres suivies </a></li>
                     <li><i class="fa-solid fa-id-card-clip"></i> Locataire</li>
                 {% elif request.user.is_superuser %}
-                    <li><i class="fa-solid fa-folder-open"></i><a href="/kot/validation_list/"> Demande de publication d'annonce </a></li>
+                    <li><i class="fa-solid fa-folder-open"></i><a href="/kot/validation_list/"> Demandes de publication d'annonce </a></li>
                     <li><i class="fa-solid fa-screwdriver-wrench"></i> Administrateur</li>
                 {% endif %}
                     <li id="deconnexion"><a href="/logout">

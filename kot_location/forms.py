@@ -26,9 +26,3 @@ class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'user_type')
-        labels = {
-            'username': "Nom d'utilisateur",
-            'user_type': "Type d'utilisateur",
-            'password1': 'Mot de passe',
-            'password2': 'Mot de passe',
-        }

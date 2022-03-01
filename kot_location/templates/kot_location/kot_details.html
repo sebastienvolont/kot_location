@@ -2,11 +2,13 @@
 
 {% block content %}
     <div id="detail-block">
-    <img src="{{ kot.kot_image}}">
+    <center><h1>Description du kot</h1></center>
+    <img src="/media/{{ kot.kot_image }}" alt="photo kot">
         <p>{{ kot.kot_address }}</p>
         <p>{{ kot.price_month }} €</p>
         <p>{{ kot.area_size }}m²</p>
         <p>{{ kot.kot_city }}</p>
+        <p>{{ kot.location_start_date }} - {{ kot.location_end_date }}</p>
     {% if request.user.user_type == 'RENTER' %}
         <button> Suivre cette offre</button>
     {% else %}

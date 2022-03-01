@@ -10,27 +10,34 @@
         {% csrf_token %}
         <label for="kot-city"> Filtrer par ville </label>
         <select name="city" id="kot-city">
-            {% for kot in kots %}
-                <option value="{{ kot.kot_city }}">{{ kot.kot_city }}</option>
+            <option value="">Filtrer par ville </option>
+            {% for field in choice_fields %}
+                <option value="{{ field.0 }}">{{ field.0 }}</option>
             {% endfor %}
         </select>
         <label for="kot-price"> Filtrer par prix </label>
         <select name="price" id="kot-price">
+            <option value=""> Filtrer par prix </option>
             <option value=299> Moins de 300 euros</option>
             <option value=300> Plus de 300 euros</option>
         </select>
         <input type="submit" value="Filtrer">
     </form> <br><br>
     <div id="kots-container">
+        <h1> {{ kots.length }}</h1>
+        {% if kots_ads.length == 0 %}
+            <p> Pas de résultats disponibles</p>
+        {% endif  %}
         {% for kot in kots %}
             {% for kotad in kots_ads %}
                 {% if kot.id == kotad.kot_id %}
                     <a href="{% url 'kot-details' kot.id %}">
                         <div id="kot-box">
-                            <img src="{{ kot.kot_image }}" alt="photo kot"> <br> <br>
+                            <img src="/media/{{ kot.kot_image }}" alt="photo kot"> <br> <br>
                             <p><i class="fa-solid fa-location-dot"></i> {{ kot.kot_address }}  </p>
                             <p><i class="fa-solid fa-coins"></i> {{ kot.price_month }} € </p>
                             <p><i class="fa-solid fa-house-chimney"></i> {{ kot.area_size }}m² </p>
+                            <p><i class="fa-solid fa-user"></i>{{kot.kot_owner}} </p>
                             {% if kot.kot_owner_id  == request.user.id %}
                                 <button id="delete-btn"><i class="fa-solid fa-trash"></i><a href="/kot/{{ kot.id }}/delete"> Supprimer l'offre</a></button> <br><br>
                                 <button id="update-btn"><i class="fa-solid fa-pen"></i><a href="/kot/{{ kot.id }}/update"> Mettre à jour </a></button>

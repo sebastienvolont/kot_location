@@ -4,8 +4,9 @@
     <div id="kot-offer-container">
     {% for kot in kots %}
         <div id="kot-offer-box">
-        <img src="{{ kot.kot_image  }}">
+        <img src="/media/{{ kot.kot_image }}" alt="photo kot">
             <h1>{{ kot.kot_address }}</h1>
+            <p> Identifiant du kot : {{ kot.id }}</p>
             <button id="delete-btn"><i class="fa-solid fa-trash"></i><a href="/kot/{{ kot.id }}/delete"> Supprimer l'offre</a></button> <br>
         </div>
     {% endfor %}

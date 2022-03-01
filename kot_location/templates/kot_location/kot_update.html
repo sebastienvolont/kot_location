@@ -3,7 +3,7 @@
 {% block content %}
     <form action="" method="post">
         <div id="img-update-page">
-            <img src="{{ kot.kot_image }}">
+            <img src="/media/{{ kot.kot_image }}" alt="photo kot">
         </div>
         <div id="form-update">
             {% csrf_token %}

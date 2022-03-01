@@ -1,9 +1,12 @@
 {% extends 'kot_location/base.html' %}
 
 {% block content %}
+    <div id="register-menu">
+    <h1> <i class="fa-solid fa-user"></i> <br> Inscription </h1>
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Envoyer">
     </form>
+    </div>
 {% endblock %}

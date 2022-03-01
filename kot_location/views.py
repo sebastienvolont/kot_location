@@ -190,7 +190,7 @@ def kot_update(request, id: int):
         else:
             form = KotForm(instance=kot_to_update)
 
-        return render(request, 'kot_location/kot_update.html', {'form': form})
+        return render(request, 'kot_location/kot_update.html', {'kot': kot_to_update, 'form': form})
     else:
         raise PermissionDenied
 

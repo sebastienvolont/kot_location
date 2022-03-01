@@ -11,9 +11,24 @@ class KotForm(forms.ModelForm):
         model = Kot
         fields = '__all__'
         exclude = ('kot_owner',)
+        labels = {
+            'kot_address': 'Adresse',
+            'kot_city': 'Ville',
+            'kot_image': 'Image',
+            'price_month': 'Loyer',
+            'area_size': 'Superficie en m²',
+            'location_start_date': 'Date de début de location',
+            'location_end_date': 'Date de fin de location',
+        }
 
 
 class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = get_user_model()
         fields = ('username', 'user_type')
+        labels = {
+            'username': "Nom d'utilisateur",
+            'user_type': "Type d'utilisateur",
+            'password1': 'Mot de passe',
+            'password2': 'Mot de passe',
+        }

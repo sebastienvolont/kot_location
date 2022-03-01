@@ -30,7 +30,8 @@ class Kot(models.Model):
 
     kot_address = models.CharField(max_length=256)
     kot_city = models.CharField(max_length=30, choices=city_choice)
-    kot_image = models.ImageField(upload_to='kot_location/')
+    kot_image = models.ImageField(upload_to='kot_location/',
+                                  default="https://d34ip4tojxno3w.cloudfront.net/app/uploads/placeholder.jpg")
     price_month = models.DecimalField(max_digits=7, decimal_places=2)
     area_size = models.IntegerField()
     location_start_date = models.DateField(null=True)

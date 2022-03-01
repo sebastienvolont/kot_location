@@ -7,30 +7,38 @@
     <link rel="icon"
           href="https://cdn-icons.flaticon.com/png/512/5502/premium/5502904.png?token=exp=1646062429~hmac=05c96139b5a6dd10468189f7156e1354">
     <link rel="stylesheet" href="{% static 'kot_location/styles.css' %}">
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
 </head>
 <body>
 <header>
     <nav>
         <ul>
-            <li><a href="/">Page d'accueil</a></li>
-            <li><a href="/kot_list">Kots disponibles</a></li>
+            <li><i class="fa-solid fa-house-chimney"></i><a href="/">Page d'accueil</a></li>
+            <li><i class="fa-solid fa-magnifying-glass"></i><a href="/kot_list">Kots disponibles</a></li>
             {% if request.user.is_authenticated %}
-                <li id="deconnexion"><a href="/logout"> {{ request.user.username }} <br> Se déconnecter </a></li>
                 {% if request.user.user_type == 'OWNER' %}
-                    <li><a href="/owner/{{ request.user.id }}/offers"> Mes offres de locations </a></li>
-                    <li> Propriétaire</li>
+                    <li><i class="fa-solid fa-table"></i><a href="/owner/{{ request.user.id }}/offers"> Mes offres de locations </a></li>
+                    <li><i class="fa-solid fa-id-card-clip"></i> Propriétaire</li>
                 {% elif request.user.user_type == 'RENTER' %}
                     <li><a href="/renter/offers"> Offres suivies </a></li>
-                    <li> Locataire</li>
+                    <li><i class="fa-solid fa-id-card-clip"></i> Locataire</li>
                 {% elif request.user.is_superuser %}
-                    <li><a href="/kot/validation_list/"> Demande de publication d'annonce </a></li>
-                    <li> Administrateur</li>
+                    <li><i class="fa-solid fa-folder-open"></i><a href="/kot/validation_list/"> Demande de publication d'annonce </a></li>
+                    <li><i class="fa-solid fa-screwdriver-wrench"></i> Administrateur</li>
                 {% endif %}
+                    <li id="deconnexion"><a href="/logout">
+                        <i class="fa-solid fa-user"></i> Utilisateur : {{ request.user.username }} <br>
+                        <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+                    </a></li>
             {% else %}
                 <li id="connexion"><a href="/login"> Se connecter </a></li> <br>
             {% endif %}
         </ul>
     </nav>
+
+    <div id="banner">
+
+    </div>
 
 </header>
 {% block content %}

@@ -2,8 +2,13 @@
 
 {% block content %}
     <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Mettre à jour">
+        <div id="img-update-page">
+            <img src="{{ kot.kot_image }}">
+        </div>
+        <div id="form-update">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Mettre à jour">
+        </div>
     </form>
 {% endblock %}

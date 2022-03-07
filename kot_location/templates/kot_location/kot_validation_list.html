@@ -1,0 +1,16 @@
+{% extends 'kot_location/base.html' %}
+
+{% block content %}
+    <div id="kot-validation-container">
+    {% for kot in kots %}
+        <div id="kot-ad-validationbox">
+        <a href="/kot/{{ kot.id }}/check">
+{#            <img src="/media/{{ kot.kot_image }}">#}
+            <p> {{ kot.kot_address }}</p>
+            <p> Identifiant du propriétaire : {{ kot.kot_owner }}</p>
+            <p><input type="submit" value="Valider"><i class="fa-solid fa-check"></i></p>
+        </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

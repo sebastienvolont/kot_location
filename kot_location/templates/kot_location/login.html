@@ -1,0 +1,12 @@
+{% extends 'kot_location/base.html' %}
+
+{% block content %}
+    <div id="login-menu">
+        <center><h1><i class="fa-solid fa-user"></i> <br>  Connexion </h1></center>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Envoyer">
+        </form>
+    </div>
+{% endblock %}

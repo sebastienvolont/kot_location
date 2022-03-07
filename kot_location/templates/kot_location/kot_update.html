@@ -1,0 +1,14 @@
+{% extends 'kot_location/base.html' %}
+
+{% block content %}
+    <form action="" method="post">
+        <div id="img-update-page">
+            <img src="/media/{{ kot.kot_image }}" alt="photo kot">
+        </div>
+        <div id="form-update">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Mettre à jour">
+        </div>
+    </form>
+{% endblock %}

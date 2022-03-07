@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Kot, User
+
+admin.site.register(Kot)
+admin.site.register(User)

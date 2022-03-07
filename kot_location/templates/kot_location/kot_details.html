@@ -1,0 +1,19 @@
+{% extends 'kot_location/base.html' %}
+
+{% block content %}
+    <div id="detail-block">
+    <center><h1>Description du kot</h1></center>
+    <img src="/media/{{ kot.kot_image }}" alt="photo kot">
+        <p>{{ kot.kot_address }}</p>
+        <p>{{ kot.price_month }} €</p>
+        <p>{{ kot.area_size }}m²</p>
+        <p>{{ kot.kot_city }}</p>
+        <p>{{ kot.location_start_date }} - {{ kot.location_end_date }}</p>
+    {% if request.user.user_type == 'RENTER' %}
+        <button> Suivre cette offre</button>
+    {% else %}
+        <button id="delete-btn"><i class="fa-solid fa-trash"></i><a href="/kot/{{ kot.id }}/delete"> Supprimer l'offre</a></button>  <br>
+        <button id="update-btn"><i class="fa-solid fa-pen"></i><a href="/kot/{{ kot.id }}/update"> Mettre à jour </a></button>
+    {% endif %}
+    </div>
+{% endblock %}
